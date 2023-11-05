@@ -1,12 +1,12 @@
 import {GetUsersRepository} from '../../domain/repositories/getUsers.repository'
 
 export class GetUsersService {
-    private userRepository: any
+    private getUsersRepository: any
     constructor(db: any) {
-        this.userRepository = new GetUsersRepository(db)
+        this.getUsersRepository = new GetUsersRepository(db)
     }
 
     async execute() {
-        return this.userRepository.execute()
+        return this.getUsersRepository.execute()
     }
 }

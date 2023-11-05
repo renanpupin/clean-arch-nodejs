@@ -13,6 +13,9 @@ export const db = {
     users: {
         get: () => {
             return data.users
+        },
+        create: (user: any) => {
+            return data.users.push(user)
         }
     }
 }

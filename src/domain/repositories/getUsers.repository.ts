@@ -5,6 +5,6 @@ export class GetUsersRepository {
     }
 
     async execute() {
-        return this.db.users.get()
+        return this.db.get()
     }
 }

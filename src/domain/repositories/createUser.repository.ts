@@ -18,6 +18,6 @@ export class CreateUserRepository {
             throw new Error('Invalid user.')
         }
 
-        return this.db.users.create(newUser)
+        return this.db.create(newUser)
     }
 }

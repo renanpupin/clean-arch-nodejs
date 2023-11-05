@@ -1,4 +1,5 @@
 import {CreateUserRepository} from '../../domain/repositories/createUser.repository'
+import {CreateUserDto} from "../../domain/dtos/createUser.dto";
 
 export class CreateUserService {
     private createUserRepository: any
@@ -6,7 +7,7 @@ export class CreateUserService {
         this.createUserRepository = new CreateUserRepository(db)
     }
 
-    async execute(user: any) {
+    async execute(user: CreateUserDto) {
         if(!user){
             throw new Error('User not provided.')
         }

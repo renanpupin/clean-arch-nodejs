@@ -13,8 +13,10 @@
 ### Adapters (Red layer)
 
 - controllers layer, receives infrasture (port) calls and orchestrate use cases that executes business logic
-- extract request params or event attributes
+- extract request params or event attributes and validates user input-sanitization
+- convert the user input into a model that the use case expects
 - compiles a structured response to return to external layers
+- we don’t want any business logic here, only data formatting logic
 
 ### Application (Green layer)
 

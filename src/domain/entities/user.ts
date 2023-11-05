@@ -7,6 +7,6 @@ export class User {
     }
 
     isValid = () => {
-        return this.id && this.name
+        return !!this.id && !!this.name
     }
 }

@@ -1,5 +1,5 @@
-import {UserEntity} from "../entities/user.entity";
 import {CreateUserDto} from "../dtos/createUser.dto";
+import {CreateUserFactory} from "../factories/createUser.factory";
 
 export class CreateUserRepository {
     private db: any
@@ -12,12 +12,8 @@ export class CreateUserRepository {
     }
 
     async execute(user: CreateUserDto) {
-        const newUser = new UserEntity(user)
+        const newUserFactory = new CreateUserFactory()
 
-        if(!this.validate(user)){
-            throw new Error('Invalid user.')
-        }
-
-        return this.db.create(newUser)
+        return this.db.create(newUserFactory.execute(user))
     }
 }

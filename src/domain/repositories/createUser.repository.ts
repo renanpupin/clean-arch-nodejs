@@ -1,4 +1,4 @@
-import {User} from "../entities/user";
+import {UserEntity} from "../entities/user.entity";
 
 export class CreateUserRepository {
     private db: any
@@ -7,7 +7,7 @@ export class CreateUserRepository {
     }
 
     async execute(user: any) {
-        const newUser = new User(user)
+        const newUser = new UserEntity(user)
         if(!newUser.isValid()){
             throw new Error('Invalid user.')
         }

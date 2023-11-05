@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
-import {User} from '../user'
+import {UserEntity} from '../user.entity'
 
 
 test('my types work properly', () => {
-    const user = new User({id: '1', name: 'Bob'})
+    const user = new UserEntity({id: '1', name: 'Bob'})
     expect(user.isValid()).toBe(true)
 })

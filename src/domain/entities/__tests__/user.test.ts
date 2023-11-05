@@ -4,5 +4,5 @@ import {UserEntity} from '../user.entity'
 
 test('my types work properly', () => {
     const user = new UserEntity({id: '1', name: 'Bob'})
-    expect(user.isValid()).toBe(true)
+    expect(user.getName()).toBe('Bob')
 })

@@ -1,6 +1,6 @@
-import {GenericDataSourceRepositoryInterface} from '@project/adapters/interfaces/genericDataSource.repository'
+import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
 
-export class UserPrismaDataSourceRepository implements GenericDataSourceRepositoryInterface {
+export class UserPrismaDataSourceRepository implements UserDataSourceRepositoryInterface {
     private db: any
     constructor(db: any) {
         this.db = db

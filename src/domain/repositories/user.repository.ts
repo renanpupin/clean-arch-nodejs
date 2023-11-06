@@ -2,12 +2,12 @@ import {CreateUserDto} from '../dtos/createUser.dto'
 import {validate, validateOrReject} from 'class-validator'
 import {UserEntity} from '../entities/user.entity'
 import {extractErrorMessage} from '../../helpers/classValidator'
-import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDao'
+import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
 
-export class UserRepository implements UserDataSourceRepositoryInterface {
-    private usersDataSource: UserDataSourceRepositoryInterface
-    constructor(usersDataSource: UserDataSourceRepositoryInterface) {
-        this.usersDataSource = usersDataSource
+export class UserRepository implements UserDaoInterface {
+    private userDao: UserDaoInterface
+    constructor(userDao: UserDaoInterface) {
+        this.userDao = userDao
     }
 
     update(record: UserEntity): Promise<UserEntity> {
@@ -26,7 +26,7 @@ export class UserRepository implements UserDataSourceRepositoryInterface {
     }
 
     async find() {
-        return this.usersDataSource.find()
+        return this.userDao.find()
     }
 
     async create(userDto: CreateUserDto) {
@@ -39,6 +39,6 @@ export class UserRepository implements UserDataSourceRepositoryInterface {
             throw new Error(validationError)
         }
 
-        return this.usersDataSource.create(newUser)
+        return this.userDao.create(newUser)
     }
 }

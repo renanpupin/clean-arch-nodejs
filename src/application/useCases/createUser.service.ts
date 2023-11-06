@@ -1,11 +1,11 @@
 import {CreateUserDto} from '@project/domain/dtos/createUser.dto'
-import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDao'
+import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
 import {UserRepository} from '../../domain/repositories/user.repository'
 
 export class CreateUserService {
     private createUserRepository: UserRepository
-    constructor(usersDataSource: UserDataSourceRepositoryInterface) {
-        this.createUserRepository = new UserRepository(usersDataSource)
+    constructor(userDao: UserDaoInterface) {
+        this.createUserRepository = new UserRepository(userDao)
     }
 
     async execute(user: CreateUserDto) {

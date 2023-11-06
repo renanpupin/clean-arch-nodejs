@@ -1,12 +1,12 @@
 import {logger} from '../../drivers/logger'
 import {CreateUserService} from '../../application/useCases/createUser.service'
 import {CreateUserDto} from '../../domain/dtos/createUser.dto'
-import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDao'
+import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
 
 export class CreateUserController {
     private createUserService: CreateUserService
-    constructor(usersDataSource: UserDataSourceRepositoryInterface) {
-        this.createUserService = new CreateUserService(usersDataSource)
+    constructor(userDao: UserDaoInterface) {
+        this.createUserService = new CreateUserService(userDao)
     }
     public execute = async (user: CreateUserDto) => {
         try {

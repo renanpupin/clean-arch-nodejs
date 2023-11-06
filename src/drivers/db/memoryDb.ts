@@ -13,7 +13,10 @@ type TableType = 'users' | 'tasks'
 
 const MemoryDbFactory = () => {
     const create = (table: TableType, item: any): Promise<any> => {
-        return Promise.resolve(data[table].push(item))
+        const createdUser = {...item, id: new Date().getTime().toString()}
+        data[table].push(createdUser)
+
+        return Promise.resolve(createdUser)
     }
 
     const update = (table: TableType, item: any): Promise<any> => {

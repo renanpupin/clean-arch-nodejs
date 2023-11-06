@@ -1,4 +1,4 @@
-export abstract class DataSourceAbstractRepository {
+export abstract class DataSourceRepositoryInterface {
     abstract create(record: any): Promise<any>
 
     abstract update(record: any): Promise<any>

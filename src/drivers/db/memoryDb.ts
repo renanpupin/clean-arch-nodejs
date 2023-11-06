@@ -9,16 +9,16 @@ let data = {
     tasks: [{id: '1', title: 'Finish the project', userId: '1'}]
 }
 
-type NamespaceType = 'users' | 'tasks'
+type TableType = 'users' | 'tasks'
 
 const MemoryDbFactory = () => {
-    const create = (namespace: NamespaceType, item: any): Promise<any> => {
-        return Promise.resolve(data[namespace].push(item))
+    const create = (table: TableType, item: any): Promise<any> => {
+        return Promise.resolve(data[table].push(item))
     }
 
-    const update = (namespace: NamespaceType, item: any): Promise<any> => {
+    const update = (table: TableType, item: any): Promise<any> => {
         return Promise.resolve(
-            data[namespace].map(record => {
+            data[table].map(record => {
                 if (record.id === item.id) {
                     return record
                 }
@@ -27,16 +27,16 @@ const MemoryDbFactory = () => {
         )
     }
 
-    const get = (namespace: NamespaceType, id: string): Promise<any> => {
-        return Promise.resolve(data[namespace].find(record => record.id === id))
+    const get = (table: TableType, id: string): Promise<any> => {
+        return Promise.resolve(data[table].find(record => record.id === id))
     }
 
-    const find = (namespace: NamespaceType): Promise<any> => {
-        return Promise.resolve(data[namespace])
+    const find = (table: TableType): Promise<any> => {
+        return Promise.resolve(data[table])
     }
 
-    const remove = (namespace: NamespaceType, id: string): Promise<any> => {
-        return Promise.resolve(data[namespace].filter(record => record.id !== id))
+    const remove = (table: TableType, id: string): Promise<any> => {
+        return Promise.resolve(data[table].filter(record => record.id !== id))
     }
 
     return {

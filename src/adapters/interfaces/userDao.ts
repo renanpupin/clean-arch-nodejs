@@ -1,7 +1,7 @@
 import {UserEntity} from '@project/domain/entities/user.entity'
-import {GenericDataSourceRepositoryInterface} from '@project/adapters/interfaces/genericDataSource.interface'
+import {GenericEntityDaoInterface} from '@project/adapters/interfaces/genericEntityDao.interface'
 
-export abstract class UserDataSourceRepositoryInterface extends GenericDataSourceRepositoryInterface {
+export abstract class UserDaoInterface extends GenericEntityDaoInterface {
     abstract create(record: UserEntity): Promise<UserEntity>
 
     abstract update(record: UserEntity): Promise<UserEntity>

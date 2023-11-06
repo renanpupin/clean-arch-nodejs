@@ -2,7 +2,7 @@ import {CreateUserDto} from '../dtos/createUser.dto'
 import {validate, validateOrReject} from 'class-validator'
 import {UserEntity} from '../entities/user.entity'
 import {extractErrorMessage} from '../../helpers/classValidator'
-import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
+import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDao'
 
 export class UserRepository implements UserDataSourceRepositoryInterface {
     private usersDataSource: UserDataSourceRepositoryInterface

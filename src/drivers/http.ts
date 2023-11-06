@@ -4,8 +4,8 @@ import {GetUsersController} from '../adapters/controllers/getUsers.controller'
 import {MemoryDb} from './db/memoryDb'
 import {PrismaDb} from './db/prismaDb'
 import {CreateUserController} from '../adapters/controllers/createUser.controller'
-import {UserMemoryDataSourceRepository} from '../adapters/repositories/userMemoryDataSource.repository'
-import {UserPrismaDataSourceRepository} from '../adapters/repositories/userPrismaDataSource.repository'
+import {UserMemoryDbDao} from '../adapters/daos/userMemoryDb.dao'
+import {UserPrismaDao} from '../adapters/daos/userPrisma.dao'
 import {HttpResponse} from '../adapters/presenters/httpResponse'
 
 const app = express()
@@ -18,12 +18,12 @@ route.get('/', (req: Request, res: Response) => {
     res.json({message: 'hello world with Typescript'})
 })
 
-// const usersDataSource = new UserMemoryDataSourceRepository(MemoryDb)
-const usersDataSource = new UserPrismaDataSourceRepository(PrismaDb)
+// const usersDao = new UserMemoryDbDao(MemoryDb)
+const usersDao = new UserPrismaDao(PrismaDb)
 
 route.get('/users', async (req: Request, res: Response) => {
     try {
-        const getUsersController = new GetUsersController(usersDataSource)
+        const getUsersController = new GetUsersController(usersDao)
 
         const users = await getUsersController.execute()
 
@@ -35,7 +35,7 @@ route.get('/users', async (req: Request, res: Response) => {
 
 route.post('/users', async (req: Request, res: Response) => {
     try {
-        const createUserController = new CreateUserController(usersDataSource)
+        const createUserController = new CreateUserController(usersDao)
 
         if (!req.body) {
             throw new Error('Request body not provided.')

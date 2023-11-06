@@ -1,5 +1,5 @@
 import {CreateUserDto} from '@project/domain/dtos/createUser.dto'
-import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
+import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDao'
 import {UserRepository} from '../../domain/repositories/user.repository'
 
 export class CreateUserService {

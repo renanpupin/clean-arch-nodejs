@@ -1,4 +1,4 @@
-export abstract class GenericDataSourceRepositoryInterface {
+export abstract class GenericEntityDaoInterface {
     abstract create(record: any): Promise<any>
 
     abstract update(record: any): Promise<any>

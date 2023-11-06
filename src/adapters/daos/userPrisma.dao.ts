@@ -1,6 +1,6 @@
-import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
+import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
 
-export class UserPrismaDataSourceRepository implements UserDataSourceRepositoryInterface {
+export class UserPrismaDao implements UserDaoInterface {
     private db: any
     constructor(db: any) {
         this.db = db

@@ -1,6 +1,6 @@
 import {logger} from '../../drivers/logger'
 import {GetUsersService} from '../../application/useCases/getUsers.service'
-import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
+import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDao'
 
 export class GetUsersController {
     private getUsersService: GetUsersService

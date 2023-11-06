@@ -1,7 +1,7 @@
 import {logger} from '../../drivers/logger'
 import {CreateUserService} from '../../application/useCases/createUser.service'
 import {CreateUserDto} from '../../domain/dtos/createUser.dto'
-import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
+import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDao'
 
 export class CreateUserController {
     private createUserService: CreateUserService

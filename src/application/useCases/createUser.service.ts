@@ -1,17 +1,17 @@
-import {CreateUserRepository} from '../../domain/repositories/createUser.repository'
 import {CreateUserDto} from '@project/domain/dtos/createUser.dto'
 import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
+import {UserRepository} from '../../domain/repositories/user.repository'
 
 export class CreateUserService {
-    private createUserRepository: any
+    private createUserRepository: UserRepository
     constructor(usersDataSource: UserDataSourceRepositoryInterface) {
-        this.createUserRepository = new CreateUserRepository(usersDataSource)
+        this.createUserRepository = new UserRepository(usersDataSource)
     }
 
     async execute(user: CreateUserDto) {
         if (!user) {
             throw new Error('User not provided.')
         }
-        return this.createUserRepository.execute(user)
+        return this.createUserRepository.create(user)
     }
 }

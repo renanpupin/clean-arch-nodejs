@@ -4,10 +4,20 @@ import {UserEntity} from '../entities/user.entity'
 import {extractErrorMessage} from '../../helpers/classValidator'
 import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
 
-export class CreateUserRepository {
-    private usersDataSource: any
+export class UserRepository implements UserDataSourceRepositoryInterface {
+    private usersDataSource: UserDataSourceRepositoryInterface
     constructor(usersDataSource: UserDataSourceRepositoryInterface) {
         this.usersDataSource = usersDataSource
+    }
+
+    update(record: UserEntity): Promise<UserEntity> {
+        throw new Error('Method not implemented.')
+    }
+    get(id: string): Promise<UserEntity> {
+        throw new Error('Method not implemented.')
+    }
+    delete(id: string): Promise<boolean> {
+        throw new Error('Method not implemented.')
     }
 
     async validate(user: UserEntity): Promise<string | null> {
@@ -15,7 +25,11 @@ export class CreateUserRepository {
         return extractErrorMessage(validationErrors)
     }
 
-    async execute(userDto: CreateUserDto) {
+    async find() {
+        return this.usersDataSource.find()
+    }
+
+    async create(userDto: CreateUserDto) {
         const newUser = new UserEntity(userDto)
 
         // await validateOrReject(newUser)

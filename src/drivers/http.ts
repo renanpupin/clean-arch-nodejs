@@ -1,11 +1,12 @@
 import express from 'express'
 import {Router, Request, Response} from 'express'
-import {GetUsersController} from '../adapters/getUsers.controller'
+import {GetUsersController} from '../adapters/controllers/getUsers.controller'
 import {MemoryDb} from './db/memoryDb'
 import {PrismaDb} from './db/prismaDb'
-import {CreateUserController} from '../adapters/createUser.controller'
+import {CreateUserController} from '../adapters/controllers/createUser.controller'
 import {UserMemoryDataSourceRepository} from '../adapters/repositories/userMemoryDataSource.repository'
 import {UserPrismaDataSourceRepository} from '../adapters/repositories/userPrismaDataSource.repository'
+import {HttpResponse} from '../adapters/presenters/httpResponse'
 
 const app = express()
 const route = Router()
@@ -26,11 +27,9 @@ route.get('/users', async (req: Request, res: Response) => {
 
         const users = await getUsersController.execute()
 
-        res.json(users)
+        return HttpResponse.success({res, data: {users}})
     } catch (error: any) {
-        res.status(500).send({
-            message: error?.message
-        })
+        return HttpResponse.error({res, error})
     }
 })
 
@@ -42,12 +41,10 @@ route.post('/users', async (req: Request, res: Response) => {
             throw new Error('Request body not provided.')
         }
 
-        const users = await createUserController.execute(req?.body?.user)
-        return res.json(users)
+        const user = await createUserController.execute(req?.body?.user)
+        return HttpResponse.success({res, data: {user}})
     } catch (error: any) {
-        return res.status(500).send({
-            message: error?.message
-        })
+        return HttpResponse.error({res, error})
     }
 })
 

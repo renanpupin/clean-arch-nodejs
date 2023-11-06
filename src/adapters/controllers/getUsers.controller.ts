@@ -1,5 +1,5 @@
-import {logger} from '../drivers/logger'
-import {GetUsersService} from '../application/useCases/getUsers.service'
+import {logger} from '../../drivers/logger'
+import {GetUsersService} from '../../application/useCases/getUsers.service'
 
 export class GetUsersController {
     private getUsersService: GetUsersService

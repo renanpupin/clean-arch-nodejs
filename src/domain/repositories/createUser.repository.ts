@@ -1,5 +1,7 @@
 import {CreateUserDto} from '../dtos/createUser.dto'
-import {CreateUserFactory} from '../factories/createUser.factory'
+import {validate, validateOrReject} from 'class-validator'
+import {UserEntity} from '../entities/user.entity'
+import {extractErrorMessage} from '../../helpers/classValidator'
 
 export class CreateUserRepository {
     private usersDataSource: any
@@ -7,9 +9,21 @@ export class CreateUserRepository {
         this.usersDataSource = usersDataSource
     }
 
-    async execute(user: CreateUserDto) {
-        const newUserFactory = new CreateUserFactory()
+    async validate(user: UserEntity): Promise<string | null> {
+        const validationErrors = await validate(user)
+        return extractErrorMessage(validationErrors)
+    }
 
-        return this.usersDataSource.create(await newUserFactory.execute(user))
+    async execute(userDto: CreateUserDto) {
+        const newUser = new UserEntity(userDto)
+
+        // await validateOrReject(newUser)
+
+        const validationError = await this.validate(newUser)
+        if (validationError) {
+            throw new Error(validationError)
+        }
+
+        return this.usersDataSource.create(newUser)
     }
 }

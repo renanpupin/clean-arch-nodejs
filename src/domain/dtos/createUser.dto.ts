@@ -1,3 +1,3 @@
-export type CreateUserDto = {
+export interface CreateUserDto {
     name: string
 }

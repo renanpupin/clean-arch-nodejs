@@ -11,7 +11,7 @@ let data = {
 
 type NamespaceType = 'users' | 'tasks'
 
-export const MemoryDb = () => {
+const MemoryDbFactory = () => {
     const create = (namespace: NamespaceType, item: any): Promise<any> => {
         return Promise.resolve(data[namespace].push(item));
     }
@@ -54,3 +54,5 @@ export const MemoryDb = () => {
         }
     }
 }
+
+export const MemoryDb = MemoryDbFactory()

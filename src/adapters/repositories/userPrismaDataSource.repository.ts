@@ -1,6 +1,6 @@
 import {IDataSourceAbstractRepository} from "@project/adapters/repositories/dataSourceAbstract.repository";
 
-export class UserDataSourceRepository implements IDataSourceAbstractRepository{
+export class UserPrismaDataSourceRepository implements IDataSourceAbstractRepository{
     private db: any;
     constructor(db: any) {
         this.db = db
@@ -14,7 +14,7 @@ export class UserDataSourceRepository implements IDataSourceAbstractRepository{
     }
 
     find(): Promise<any> {
-        return this.db.users.find();
+        return this.db.users.findMany();
     }
 
     delete(id: string): Promise<any> {

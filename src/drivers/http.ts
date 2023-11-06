@@ -1,9 +1,12 @@
 import express from 'express'
 import {Router, Request, Response} from 'express'
 import {GetUsersController} from '../adapters/getUsers.controller'
-import {MemoryDb} from './memoryDb'
+import {MemoryDb} from './db/memoryDb'
+import {PrismaDb} from './db/prismaDb'
 import {CreateUserController} from "../adapters/createUser.controller";
-import {UserDataSourceRepository} from "../adapters/repositories/user.repository";
+import {UserMemoryDataSourceRepository} from "../adapters/repositories/userMemoryDataSource.repository";
+import {UserPrismaDataSourceRepository} from "../adapters/repositories/userPrismaDataSource.repository";
+
 
 const app = express()
 const route = Router()
@@ -15,13 +18,15 @@ route.get('/', (req: Request, res: Response) => {
     res.json({message: 'hello world with Typescript'})
 })
 
-const usersDataSource = new UserDataSourceRepository(MemoryDb())
+const usersDataSource = new UserMemoryDataSourceRepository(MemoryDb)
+// const usersDataSource = new UserPrismaDataSourceRepository(PrismaDb)
 
 route.get('/users', async (req: Request, res: Response) => {
     try {
         const getUsersController = new GetUsersController(usersDataSource)
 
         const users = await getUsersController.execute()
+
         res.json(users)
     } catch (error: any) {
         res.status(500).send({

@@ -1,10 +1,10 @@
 import {CreateUserRepository} from '../../domain/repositories/createUser.repository'
-import {CreateUserDto} from "../../domain/dtos/createUser.dto";
+import {CreateUserDto} from "@project/domain/dtos/createUser.dto";
 
 export class CreateUserService {
     private createUserRepository: any
-    constructor(db: any) {
-        this.createUserRepository = new CreateUserRepository(db)
+    constructor(usersDataSource: any) {
+        this.createUserRepository = new CreateUserRepository(usersDataSource)
     }
 
     async execute(user: CreateUserDto) {

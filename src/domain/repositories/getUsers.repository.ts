@@ -1,10 +1,10 @@
 export class GetUsersRepository {
-    private db: any
-    constructor(db: any) {
-        this.db = db
+    private usersDataSource: any
+    constructor(usersDataSource: any) {
+        this.usersDataSource = usersDataSource
     }
 
     async execute() {
-        return this.db.get()
+        return this.usersDataSource.find()
     }
 }

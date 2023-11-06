@@ -13,11 +13,11 @@ export class CreateUserFactory {
         return extractErrorMessage(validationErrors)
     }
 
-    async execute(userDto: CreateUserDto) {
+    async execute(userDto: CreateUserDto): Promise<UserEntity> {
         const newUser = new UserEntity(userDto)
 
         // await validateOrReject(newUser)
-        
+
         const validationError = await this.validate(newUser)
         if (validationError) {
             throw new Error(validationError)

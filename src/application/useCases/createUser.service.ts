@@ -1,9 +1,10 @@
 import {CreateUserRepository} from '../../domain/repositories/createUser.repository'
 import {CreateUserDto} from '@project/domain/dtos/createUser.dto'
+import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
 
 export class CreateUserService {
     private createUserRepository: any
-    constructor(usersDataSource: any) {
+    constructor(usersDataSource: UserDataSourceRepositoryInterface) {
         this.createUserRepository = new CreateUserRepository(usersDataSource)
     }
 

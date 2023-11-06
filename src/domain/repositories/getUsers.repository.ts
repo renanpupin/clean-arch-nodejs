@@ -1,6 +1,8 @@
+import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
+
 export class GetUsersRepository {
-    private usersDataSource: any
-    constructor(usersDataSource: any) {
+    private usersDataSource: UserDataSourceRepositoryInterface
+    constructor(usersDataSource: UserDataSourceRepositoryInterface) {
         this.usersDataSource = usersDataSource
     }
 

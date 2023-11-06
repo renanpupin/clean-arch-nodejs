@@ -1,10 +1,11 @@
 import {logger} from '../../drivers/logger'
 import {CreateUserService} from '../../application/useCases/createUser.service'
 import {CreateUserDto} from '../../domain/dtos/createUser.dto'
+import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
 
 export class CreateUserController {
     private createUserService: CreateUserService
-    constructor(usersDataSource: any) {
+    constructor(usersDataSource: UserDataSourceRepositoryInterface) {
         this.createUserService = new CreateUserService(usersDataSource)
     }
     public execute = async (user: CreateUserDto) => {

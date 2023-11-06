@@ -2,10 +2,11 @@ import {CreateUserDto} from '../dtos/createUser.dto'
 import {validate, validateOrReject} from 'class-validator'
 import {UserEntity} from '../entities/user.entity'
 import {extractErrorMessage} from '../../helpers/classValidator'
+import {UserDataSourceRepositoryInterface} from '@project/adapters/interfaces/userDataSource.interface'
 
 export class CreateUserRepository {
     private usersDataSource: any
-    constructor(usersDataSource: any) {
+    constructor(usersDataSource: UserDataSourceRepositoryInterface) {
         this.usersDataSource = usersDataSource
     }
 

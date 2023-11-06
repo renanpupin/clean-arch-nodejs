@@ -1,4 +1,5 @@
 import {CreateUserDto} from '../dtos/createUser.dto'
+import {UpdateUserDto} from '../dtos/updateUser.dto'
 import {UserEntity} from '../entities/user.entity'
 import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
 
@@ -8,14 +9,15 @@ export class UserRepository implements UserDaoInterface {
         this.userDao = userDao
     }
 
-    update(record: UserEntity): Promise<UserEntity> {
-        throw new Error('Method not implemented.')
+    async update(record: UpdateUserDto): Promise<UserEntity> {
+        const updatedUserEntity = await UserEntity.create(record)
+        return this.userDao.update(updatedUserEntity)
     }
     get(id: string): Promise<UserEntity> {
-        throw new Error('Method not implemented.')
+        return this.userDao.get(id)
     }
     delete(id: string): Promise<boolean> {
-        throw new Error('Method not implemented.')
+        return this.userDao.delete(id)
     }
 
     async find() {

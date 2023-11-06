@@ -12,6 +12,7 @@ export class CreateUserService {
         if (!user) {
             throw new Error('User not provided.')
         }
+
         return this.createUserRepository.create(user)
     }
 }

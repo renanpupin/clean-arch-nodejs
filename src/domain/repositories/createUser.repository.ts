@@ -1,5 +1,5 @@
-import {CreateUserDto} from "../dtos/createUser.dto";
-import {CreateUserFactory} from "../factories/createUser.factory";
+import {CreateUserDto} from '../dtos/createUser.dto'
+import {CreateUserFactory} from '../factories/createUser.factory'
 
 export class CreateUserRepository {
     private usersDataSource: any
@@ -9,8 +9,6 @@ export class CreateUserRepository {
 
     async execute(user: CreateUserDto) {
         const newUserFactory = new CreateUserFactory()
-
-        console.log('aaa', this.usersDataSource)
 
         return this.usersDataSource.create(await newUserFactory.execute(user))
     }

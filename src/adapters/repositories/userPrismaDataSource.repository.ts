@@ -1,28 +1,43 @@
-import {IDataSourceAbstractRepository} from "@project/adapters/repositories/dataSourceAbstract.repository";
+import {DataSourceAbstractRepository} from '@project/adapters/repositories/dataSourceAbstract.repository'
 
-export class UserPrismaDataSourceRepository implements IDataSourceAbstractRepository{
-    private db: any;
+export class UserPrismaDataSourceRepository implements DataSourceAbstractRepository {
+    private db: any
     constructor(db: any) {
         this.db = db
     }
     create(user: any): Promise<any> {
-        return this.db.users.create(user);
+        return this.db.users.create({
+            data: user
+        })
     }
 
     get(id: string): Promise<any> {
-        return this.db.users.get({id});
+        return this.db.users.findFirst({
+            where: {
+                id
+            }
+        })
     }
 
     find(): Promise<any> {
-        return this.db.users.findMany();
+        return this.db.users
+            .findMany
+            // {
+            //     where: {}
+            // }
+            ()
     }
 
     delete(id: string): Promise<any> {
-        return this.db.users.delete({id});
+        return this.db.users.delete({
+            where: {id}
+        })
     }
 
     update(user: any): Promise<any> {
-        return this.db.users.update(user);
+        return this.db.users.update({
+            where: {id: user.id},
+            data: user
+        })
     }
-
 }

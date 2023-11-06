@@ -1,6 +1,6 @@
-import { expect, test } from 'vitest'
+import {expect, test} from 'vitest'
 import {CreateUserFactory} from '../createUser.factory'
-import {UserEntity} from "../../entities/user.entity";
+import {UserEntity} from '../../entities/user.entity'
 
 test('test CreateUserFactory', async () => {
     const createUserFactory = new CreateUserFactory()

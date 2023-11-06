@@ -13,28 +13,30 @@ type NamespaceType = 'users' | 'tasks'
 
 const MemoryDbFactory = () => {
     const create = (namespace: NamespaceType, item: any): Promise<any> => {
-        return Promise.resolve(data[namespace].push(item));
+        return Promise.resolve(data[namespace].push(item))
     }
 
     const update = (namespace: NamespaceType, item: any): Promise<any> => {
-        return Promise.resolve(data[namespace].map(record => {
-            if(record.id === item.id){
-                return record
-            }
-            return item
-        }));
+        return Promise.resolve(
+            data[namespace].map(record => {
+                if (record.id === item.id) {
+                    return record
+                }
+                return item
+            })
+        )
     }
 
-    const get = (namespace: NamespaceType, id: string): Promise<any>  =>{
-        return Promise.resolve(data[namespace].find(record => record.id === id));
+    const get = (namespace: NamespaceType, id: string): Promise<any> => {
+        return Promise.resolve(data[namespace].find(record => record.id === id))
     }
 
-    const find = (namespace: NamespaceType): Promise<any> =>  {
-        return Promise.resolve(data[namespace]);
+    const find = (namespace: NamespaceType): Promise<any> => {
+        return Promise.resolve(data[namespace])
     }
 
-    const remove = (namespace: NamespaceType, id: string): Promise<any> =>  {
-        return Promise.resolve(data[namespace].filter(record => record.id !== id));
+    const remove = (namespace: NamespaceType, id: string): Promise<any> => {
+        return Promise.resolve(data[namespace].filter(record => record.id !== id))
     }
 
     return {
@@ -43,14 +45,14 @@ const MemoryDbFactory = () => {
             update: (item: any) => update('users', item),
             get: (id: string) => get('users', id),
             delete: (id: string) => remove('users', id),
-            find: () => find('users'),
+            find: () => find('users')
         },
         tasks: {
             create: (item: any) => create('tasks', item),
             update: (item: any) => update('tasks', item),
             get: (id: string) => get('tasks', id),
             delete: (id: string) => remove('tasks', id),
-            find: () => find('tasks'),
+            find: () => find('tasks')
         }
     }
 }

@@ -3,10 +3,9 @@ import {Router, Request, Response} from 'express'
 import {GetUsersController} from '../adapters/getUsers.controller'
 import {MemoryDb} from './db/memoryDb'
 import {PrismaDb} from './db/prismaDb'
-import {CreateUserController} from "../adapters/createUser.controller";
-import {UserMemoryDataSourceRepository} from "../adapters/repositories/userMemoryDataSource.repository";
-import {UserPrismaDataSourceRepository} from "../adapters/repositories/userPrismaDataSource.repository";
-
+import {CreateUserController} from '../adapters/createUser.controller'
+import {UserMemoryDataSourceRepository} from '../adapters/repositories/userMemoryDataSource.repository'
+import {UserPrismaDataSourceRepository} from '../adapters/repositories/userPrismaDataSource.repository'
 
 const app = express()
 const route = Router()
@@ -18,8 +17,8 @@ route.get('/', (req: Request, res: Response) => {
     res.json({message: 'hello world with Typescript'})
 })
 
-const usersDataSource = new UserMemoryDataSourceRepository(MemoryDb)
-// const usersDataSource = new UserPrismaDataSourceRepository(PrismaDb)
+// const usersDataSource = new UserMemoryDataSourceRepository(MemoryDb)
+const usersDataSource = new UserPrismaDataSourceRepository(PrismaDb)
 
 route.get('/users', async (req: Request, res: Response) => {
     try {
@@ -38,6 +37,10 @@ route.get('/users', async (req: Request, res: Response) => {
 route.post('/users', async (req: Request, res: Response) => {
     try {
         const createUserController = new CreateUserController(usersDataSource)
+
+        if (!req.body) {
+            throw new Error('Request body not provided.')
+        }
 
         const users = await createUserController.execute(req?.body?.user)
         return res.json(users)

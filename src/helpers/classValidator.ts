@@ -1,6 +1,6 @@
-import {ValidationError} from "class-validator/types/validation/ValidationError";
+import {ValidationError} from 'class-validator/types/validation/ValidationError'
 export const extractErrorMessage = (validationErrors: ValidationError[]): string | null => {
-    if(!validationErrors || validationErrors?.length === 0 ){
+    if (!validationErrors || validationErrors?.length === 0) {
         return null
     }
 

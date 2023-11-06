@@ -1,7 +1,5 @@
 import {CreateUserDto} from '../dtos/createUser.dto'
-import {validate, validateOrReject} from 'class-validator'
 import {UserEntity} from '../entities/user.entity'
-import {extractErrorMessage} from '../../helpers/classValidator'
 import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
 
 export class UserRepository implements UserDaoInterface {
@@ -20,24 +18,12 @@ export class UserRepository implements UserDaoInterface {
         throw new Error('Method not implemented.')
     }
 
-    async validate(user: UserEntity): Promise<string | null> {
-        const validationErrors = await validate(user)
-        return extractErrorMessage(validationErrors)
-    }
-
     async find() {
         return this.userDao.find()
     }
 
     async create(userDto: CreateUserDto) {
-        const newUser = new UserEntity(userDto)
-
-        // await validateOrReject(newUser)
-
-        const validationError = await this.validate(newUser)
-        if (validationError) {
-            throw new Error(validationError)
-        }
+        const newUser = await UserEntity.create(userDto)
 
         return this.userDao.create(newUser)
     }

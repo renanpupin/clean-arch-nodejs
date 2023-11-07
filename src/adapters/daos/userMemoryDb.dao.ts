@@ -1,6 +1,6 @@
-import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
+import {UserRepository} from '@project/domain/repositories/user.repository'
 
-export class UserMemoryDbDao implements UserDaoInterface {
+export class UserMemoryDbDao implements UserRepository {
     private db: any
     constructor(db: any) {
         this.db = db

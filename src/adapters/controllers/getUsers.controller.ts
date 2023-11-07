@@ -1,11 +1,11 @@
 import {logger} from '../../drivers/logger'
 import {GetUsersService} from '../../application/useCases/getUsers.service'
-import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
+import {UserRepository} from '@project/domain/repositories/user.repository'
 
 export class GetUsersController {
     private getUsersService: GetUsersService
-    constructor(userDao: UserDaoInterface) {
-        this.getUsersService = new GetUsersService(userDao)
+    constructor(userRepository: UserRepository) {
+        this.getUsersService = new GetUsersService(userRepository)
     }
     public execute = async () => {
         try {

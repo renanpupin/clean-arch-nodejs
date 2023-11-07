@@ -1,11 +1,11 @@
 import {CreateUserDto} from '@project/domain/dtos/createUser.dto'
-import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
 import {UserRepository} from '../../domain/repositories/user.repository'
+import {UserEntity} from '../../domain/entities/user.entity'
 
 export class CreateUserService {
-    private createUserRepository: UserRepository
-    constructor(userDao: UserDaoInterface) {
-        this.createUserRepository = new UserRepository(userDao)
+    private userRepository: UserRepository
+    constructor(userRepository: UserRepository) {
+        this.userRepository = userRepository
     }
 
     async execute(user: CreateUserDto) {
@@ -13,6 +13,8 @@ export class CreateUserService {
             throw new Error('User not provided.')
         }
 
-        return this.createUserRepository.create(user)
+        const newUser = await UserEntity.create(user)
+
+        return this.userRepository.create(newUser)
     }
 }

@@ -1,32 +1,14 @@
-import {CreateUserDto} from '../dtos/createUser.dto'
-import {UpdateUserDto} from '../dtos/updateUser.dto'
-import {UserEntity} from '../entities/user.entity'
-import {UserDaoInterface} from '@project/adapters/interfaces/userDao'
+import {UserEntity} from '@project/domain/entities/user.entity'
+import {GenericRepositoryInterface} from './genericRepository.interface'
 
-export class UserRepository implements UserDaoInterface {
-    private userDao: UserDaoInterface
-    constructor(userDao: UserDaoInterface) {
-        this.userDao = userDao
-    }
+export abstract class UserRepository extends GenericRepositoryInterface {
+    abstract create(record: UserEntity): Promise<UserEntity>
 
-    async update(record: UpdateUserDto): Promise<UserEntity> {
-        const updatedUserEntity = await UserEntity.create(record)
-        return this.userDao.update(updatedUserEntity)
-    }
-    get(id: string): Promise<UserEntity> {
-        return this.userDao.get(id)
-    }
-    delete(id: string): Promise<boolean> {
-        return this.userDao.delete(id)
-    }
+    abstract update(record: UserEntity): Promise<UserEntity>
 
-    async find() {
-        return this.userDao.find()
-    }
+    abstract get(id: string): Promise<UserEntity>
 
-    async create(userDto: CreateUserDto) {
-        const newUser = await UserEntity.create(userDto)
+    abstract delete(id: string): Promise<boolean>
 
-        return this.userDao.create(newUser)
-    }
+    abstract find(): Promise<UserEntity[]>
 }

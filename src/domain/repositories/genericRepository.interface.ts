@@ -1,4 +1,4 @@
-export abstract class GenericEntityDaoInterface {
+export abstract class GenericRepositoryInterface {
     abstract create(record: any): Promise<any>
 
     abstract update(record: any): Promise<any>
